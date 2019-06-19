@@ -1,0 +1,281 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+            <title>MLator</title>
+            <link rel="shortcut icon" href="{{url_for('static',filename='favicon.jpg')}}">
+
+                <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+                    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+                        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+                        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+                        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+                        <link href="https://fonts.googleapis.com/css?family=Fjalla+One" rel="stylesheet">
+                            <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+                                <script type="text/javascript"  src="{{ url_for('static', filename='js/jquery.min.1.7.js') }}"></script>
+                                <script type="text/javascript"  src="{{ url_for('static', filename='js/dropzone.js') }}"></script>
+                                <script type="stylesheet"  src="{{ url_for('static', filename='css/dropzone.css') }}"></script>
+
+                                </head>
+    <body>
+        <nav id='navbar' class="navbar navbar-expand-sm ">
+            <a id='brand' class="navbar-brand brand text-white" href='/'>{{ current_user.get_user_name()|upper }}</a>
+            
+            
+            <div class="navbar-nav ml-auto">
+                
+                <ul class="navbar-nav mr-auto">
+                   
+                    <li class="nav-item">
+                        
+                        <span class="nav-link"  href="#carouselExampleControls" role="button" data-slide="next" data-spy="affix" data-offset-top="501" data-offset-bottom="">
+                            <button type="button" id="sidebarCollapse" class="navbar-btn sticky  active" style="display: table-cell;">
+                                <i class="fas fa-cog"></i>
+                            </button>
+                        </span></li>
+                    
+                </ul>
+            </div>
+            
+        </nav>
+        <div id='spacer' style='height:110px'></div>
+        <div class="wrapper">
+            
+            <nav id="sidebar" class="navbar navbar-dark  flex-md-nowrap shadow">
+                <!-- Sidebar Header -->
+                <ul class="navbar-nav mr-auto">
+                   
+                    <li class="nav-item">
+                        <a class="font-weight-bold btn nav-link" href="#">
+                            
+                            New Translation
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link btn" href="#">
+                        My Projects
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link btn" href="#">
+                        <a class="nav-link" href="{{ url_for('account') }}">
+                           
+                            My Account
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link btn" href="/logout">
+                            
+                            Log Out
+                        </a>
+                    </li>
+                    
+                </ul>
+                <!-- Sidebar Links -->
+         
+            </nav>
+            
+        
+                    <div class="row">
+                        <div class="col-6 " >
+                            <DIV id="dropzone">
+                                <FORM class="dropzone needsclick" id="demo-upload" action="/upload">
+                                    {{ dropzone.csrf_token }} <!--  render the form's CSRF field like normal. -->
+
+                                    <DIV class="dz-message needsclick">
+                                        Drop files here or click to upload.
+                                                                            </DIV>
+                                </FORM>
+                            </DIV>
+                            
+                            
+                            <div class="progress">
+                                <div id="upload_progress" class="progress-bar bg-success progress-bar-striped" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="min-width: 0; width: 0%">
+                                </div></div>
+                           
+
+                                
+
+</div></div>
+                        <div class="col-6 align-content-end flex-wrap" >
+                   <ul id='image-list'></ul>
+                        </div>
+                    </div>
+                </div>
+
+
+        
+        <input type="file" multiple="multiple" class="dz-hidden-input" style="visibility: hidden; position: absolute; top: 0px; left: 0px; height: 0px; width: 0px;">
+        
+        <script>
+
+            
+            
+        $(document).ready(function () {
+                          var obj = $("#dragandrophandler")
+                          
+                          
+                          window.onload = function() {scroller();};
+                          
+                          window.onready =       function() { $("#dragandrophandler")};
+                          
+                          window.onscroll = function() {scroller()};
+                          
+                          document.getElementById("navbar").style.padding = "10px 10px";
+                          
+                          
+                          
+                          $('#sidebarCollapse').on('click', function () {
+                                                   $('#buttone0').toggleClass('active');
+                                                   
+                                                   $('#sidebar').toggleClass('active');
+                                                   $('#sidebar').paddingTop= $('#navbar').height();
+                                                   $(this).toggleClass('active');
+                                                   });
+                          function scroller() {
+                          if (document.body.scrollTop > 10 || document.documentElement.scrollTop > 10) {
+                          document.getElementById("navbar").style.padding = "0px 0px";
+                          document.getElementById("sidebar").style.padding = "35px";
+                          document.getElementById("spacer").style.height = "90px";
+                          var link_list = document.querySelectorAll("#navbar a ");
+                          var index = 0, length = link_list.length;
+                          for ( ; index < length; index++) {
+                          link_list[index].style.fontSize = "25px";
+                          }
+                          document.getElementById("brand").style.fontSize = "25px";
+                          } else {
+                          document.getElementById("sidebar").style.padding = "45px";
+                          document.getElementById("spacer").style.height = "110px";
+                          
+                          document.getElementById("navbar").style.padding = "10px 10px";
+                          var link_list = document.querySelectorAll("#navbar a ");
+                          var index = 0, length = link_list.length;
+                          for ( ; index < length; index++) {
+                          link_list[index].style.fontSize = "35px";
+                          }
+                          document.getElementById("brand").style.fontSize = "35px";
+                          }
+                          }
+                          
+                          
+                         
+                        
+                          
+                          
+                          $("#my-awesome-dropzone").css('border', '2px dotted #0B85A1');
+                          $("#my-awesome-dropzone").css('height', '75vh');
+                          $("#my-awesome-dropzone").on('dragenter', function (e) {
+                                 e.stopPropagation();
+                                 e.preventDefault();
+                                 $(this).css('border', '2px solid #0B85A1');
+                                 });
+                          $("#my-awesome-dropzone").on('dragover', function (e) {
+                                 e.stopPropagation();
+                                 e.preventDefault();
+                                 });
+                         
+                          $(document).on('dragenter', function (e) {
+                                         e.stopPropagation();
+                                         e.preventDefault();
+                                         });
+                          $(document).on('dragover', function (e) {
+                                         e.stopPropagation();
+                                         e.preventDefault();
+                                         obj.css('border', '2px dotted #0B85A1');
+                                         });
+                          $(document).on('drop', function (e) {
+                                         e.stopPropagation();
+                                         e.preventDefault();
+                                         });
+                 
+                        
+                          
+                          
+                          
+                          });
+                          window.onload = function() {
+
+                              var dropzone = new Dropzone('#demo-upload', {
+                                              previewTemplate: document.querySelector('#preview-template').innerHTML,
+                                              parallelUploads: 2,
+                                              thumbnailHeight: 120,
+                                              thumbnailWidth: 120,
+                                              maxFilesize: 3,
+                                              filesizeBase: 1000,
+                                              addRemoveLinks : true,
+                                              thumbnail: function(file, dataUrl) {
+                                              if (file.previewElement) {
+                                              file.previewElement.classList.remove("dz-file-preview");
+                                              var images = file.previewElement.querySelectorAll("[data-dz-thumbnail]");
+                                              for (var i = 0; i < images.length; i++) {
+                                              var thumbnailElement = images[i];
+                                              thumbnailElement.alt = file.name;
+                                              thumbnailElement.src = dataUrl;
+                                              }
+                                              setTimeout(function() { file.previewElement.classList.add("dz-image-preview"); }, 1);
+                                              }
+                                                          },
+                                             headers: {'x-csrftoken': $.cookie('csrftoken')},
+                                              
+                                              });
+                                              
+                                              
+                                              
+                                              var minSteps = 6,
+                                              maxSteps = 60,
+                                              timeBetweenSteps = 100,
+                                              bytesPerStep = 100000;
+                                              
+                                              dropzone.uploadFiles = function(files) {
+                                                  var self = this;
+                                                  
+                                                  for (var i = 0; i < files.length; i++) {
+                                                      
+                                                      var file = files[i];
+                                                      totalSteps = Math.round(Math.min(maxSteps, Math.max(minSteps, file.size / bytesPerStep)));
+                                                      
+                                                      for (var step = 0; step < totalSteps; step++) {
+                                                          var duration = timeBetweenSteps * (step + 1);
+                                                          setTimeout(function(file, totalSteps, step) {
+                                                                     return function() {
+                                                                     file.upload = {
+                                                                     progress: 100 * (step + 1) / totalSteps,
+                                                                     total: file.size,
+                                                                     bytesSent: (step + 1) * file.size / totalSteps
+                                                                     };
+                                                                     
+                                                                     self.emit('uploadprogress', file, file.upload.progress, file.upload.bytesSent);
+                                                                     if (file.upload.progress == 100) {
+                                                                     file.status = Dropzone.SUCCESS;
+                                                                     self.emit("success", file, 'success', null);
+                                                                     self.emit("complete", file);
+                                                                     self.processQueue();
+                                                                     }
+                                                                     };
+                                                                     }(file, totalSteps, step), duration);
+                                                      }
+                                                  }
+                                              };
+                                              
+                                              
+                                              
+                          };
+            </script>
+        
+    </body>
+</html>
+

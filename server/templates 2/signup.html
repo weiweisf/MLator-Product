@@ -1,0 +1,17 @@
+{% from "render_field.html" import render_field %}
+
+<!-- Form to Register User-->
+<div class='container'>
+    {% include 'flash.html' %}
+    
+    <form id="register" method="POST" action='checkRegister'> <!-- post : handle submission -->
+        <div id='registerErrors'></div>
+        {{ form.hidden_tag() }}
+        {{ render_field(form.username) }}
+        {{render_field(form.useremail) }}
+        {{ render_field(form.password) }}
+        <center> {{ render_field(form.submit)}} </center>
+    </form>
+    <br/>
+    <center> Already have an account? <a href="login">Log in</a> </center>
+</div> <!-- /container -->

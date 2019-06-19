@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+            <title>MLator</title>
+                <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+                    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+                        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+                        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+                        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+                        <link href="https://fonts.googleapis.com/css?family=Fjalla+One" rel="stylesheet">
+                        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+                            {{ dropzone.load() }}
+                            {{ dropzone.style('border: 2px dashed #0087F7; margin: 10%; min-height: 400px;') }}
+    </head>
+    <body>
+        <nav id='navbar' class="navbar navbar-expand-sm ">
+            <a id='brand' class="navbar-brand brand text-white" href='/'>{{ current_user.get_user_name()|upper }}</a>
+            
+            
+            <div class="navbar-nav ml-auto">
+                
+                <ul class="navbar-nav mr-auto">
+                   
+                    <li class="nav-item">
+                        
+                        <span class="nav-link"  href="#carouselExampleControls" role="button" data-slide="next" data-spy="affix" data-offset-top="501" data-offset-bottom="">
+                            <button type="button" id="sidebarCollapse" class="navbar-btn sticky  active" style="display: table-cell;">
+                                <i class="fas fa-cog"></i>
+                            </button>
+                        </span></li>
+                    
+                </ul>
+            </div>
+            
+        </nav>
+        <div id='spacer' style='height:110px'></div>
+        <div class="wrapper">
+            
+            <nav id="sidebar" class="navbar navbar-dark  flex-md-nowrap shadow">
+                <!-- Sidebar Header -->
+                <ul class="navbar-nav mr-auto">
+                   
+                    <li class="nav-item">
+                        <a class="font-weight-bold btn nav-link" href="#">
+                            
+                            New Translation
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link btn" href="#">
+                        My Projects
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link btn" href="#">
+                        <a class="nav-link" href="{{ url_for('account') }}">
+                           
+                            My Account
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link btn" href="/logout">
+                            
+                            Log Out
+                        </a>
+                    </li>
+                    
+                </ul>
+                <!-- Sidebar Links -->
+         
+            </nav>
+            
+            <div id="content">
+
+     {% with messages = get_flashed_messages() %}
+     {% if messages %}
+     <ul class=flashes>
+         {% for message in messages %}
+         <li>{{ message }}</li>
+         {% endfor %}
+     </ul>
+     {% endif %}
+     {% endwith %}
+  {{ dropzone.create(action_view='upload') }}
+ 
+ </body>
+ </html>
+
+
+
+
+                <div class="container-fluid">
+                    <div id="carouselExample" class="carousel slide" data-ride="carousel" data-interval="9000">
+                        <div class="carousel-inner row w-100 mx-auto" role="listbox">
+                            <div class="carousel-item col-md-3  active">
+                                <div class="panel panel-default">
+                                    <div class="panel-thumbnail">
+                                        <a href="#" title="image 1" class="thumb">
+                                            <img class="img-fluid mx-auto d-block" src="//via.placeholder.com/600x400?text=1" alt="slide 1">
+                                                </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="carousel-item col-md-3 ">
+                                <div class="panel panel-default">
+                                    <div class="panel-thumbnail">
+                                        <a href="#" title="image 3" class="thumb">
+                                            <img class="img-fluid mx-auto d-block" src="//via.placeholder.com/600x400?text=2" alt="slide 2">
+                                                </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="carousel-item col-md-3 ">
+                                <div class="panel panel-default">
+                                    <div class="panel-thumbnail">
+                                        <a href="#" title="image 4" class="thumb">
+                                            <img class="img-fluid mx-auto d-block" src="//via.placeholder.com/600x400?text=3" alt="slide 3">
+                                                </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="carousel-item col-md-3 ">
+                                <div class="panel panel-default">
+                                    <div class="panel-thumbnail">
+                                        <a href="#" title="image 5" class="thumb">
+                                            <img class="img-fluid mx-auto d-block" src="//via.placeholder.com/600x400?text=4" alt="slide 4">
+                                                </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="carousel-item col-md-3 ">
+                                <div class="panel panel-default">
+                                    <div class="panel-thumbnail">
+                                        <a href="#" title="image 6" class="thumb">
+                                            <img class="img-fluid mx-auto d-block" src="//via.placeholder.com/600x400?text=5" alt="slide 5">
+                                                </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="carousel-item col-md-3 ">
+                                <div class="panel panel-default">
+                                    <div class="panel-thumbnail">
+                                        <a href="#" title="image 7" class="thumb">
+                                            <img class="img-fluid mx-auto d-block" src="//via.placeholder.com/600x400?text=6" alt="slide 6">
+                                                </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="carousel-item col-md-3 ">
+                                <div class="panel panel-default">
+                                    <div class="panel-thumbnail">
+                                        <a href="#" title="image 8" class="thumb">
+                                            <img class="img-fluid mx-auto d-block" src="//via.placeholder.com/600x400?text=7" alt="slide 7">
+                                                </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="carousel-item col-md-3  ">
+                                <div class="panel panel-default">
+                                    <div class="panel-thumbnail">
+                                        <a href="#" title="image 2" class="thumb">
+                                            <img class="img-fluid mx-auto d-block" src="//via.placeholder.com/600x400?text=8" alt="slide 8">
+                                                </a>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        <a class="carousel-control-prev" href="#carouselExample" role="button" data-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="carousel-control-next text-faded" href="#carouselExample" role="button" data-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+        <script>
+            $(document).ready(function () {
+
+            
+            
+            window.onscroll = function() {scroller()};
+          
+          document.getElementById("navbar").style.padding = "10px 10px";
+
+                              
+                              
+          $('#sidebarCollapse').on('click', function () {
+                                   $('#buttone0').toggleClass('active');
+                                   
+                                   $('#sidebar').toggleClass('active');
+                                   $('#sidebar').paddingTop= $('#navbar').height();
+                                   $(this).toggleClass('active');
+                                   });
+            function scroller() {
+                if (document.body.scrollTop > 10 || document.documentElement.scrollTop > 10) {
+                    document.getElementById("navbar").style.padding = "0px 0px";
+                  document.getElementById("sidebar").style.padding = "35px";
+                   document.getElementById("spacer").style.height = "90px";
+                    var link_list = document.querySelectorAll("#navbar a ");
+                    var index = 0, length = link_list.length;
+                    for ( ; index < length; index++) {
+                        link_list[index].style.fontSize = "25px";
+                    }
+                    document.getElementById("brand").style.fontSize = "25px";
+                } else {
+                      document.getElementById("sidebar").style.padding = "45px";
+                              document.getElementById("spacer").style.height = "110px";
+
+                    document.getElementById("navbar").style.padding = "10px 10px";
+                    var link_list = document.querySelectorAll("#navbar a ");
+                    var index = 0, length = link_list.length;
+                    for ( ; index < length; index++) {
+                        link_list[index].style.fontSize = "35px";
+                    }
+                    document.getElementById("brand").style.fontSize = "35px";
+                }
+            }
+                              
+                  
+                              $('#carouselExample').on('slide.bs.carousel', function (e) {
+                                                       
+                                                       
+                                                       var $e = $(e.relatedTarget);
+                                                       var idx = $e.index();
+                                                       var itemsPerSlide = 4;
+                                                       var totalItems = $('.carousel-item').length;
+                                                       
+                                                       if (idx >= totalItems-(itemsPerSlide-1)) {
+                                                       var it = itemsPerSlide - (totalItems - idx);
+                                                       for (var i=0; i<it; i++) {
+                                                       // append slides to end
+                                                       if (e.direction=="left") {
+                                                       $('.carousel-item').eq(i).appendTo('.carousel-inner');
+                                                       }
+                                                       else {
+                                                       $('.carousel-item').eq(0).appendTo('.carousel-inner');
+                                                       }
+                                                       }
+                                                       }
+                                                       });
+                              
+                              
+                              $('#carouselExample').carousel({
+                                                             interval: 5000
+                                                             });
+                              
+                              
+                              document.getElementById("sidebar").style.padding = "45px";
+                              document.getElementById("spacer").style.height = "110px";
+                                                $('a.thumb').click(function(event){
+                                                                   event.preventDefault();
+                                                                   var content = $('.modal-body');
+                                                                   content.empty();
+                                                                   var title = $(this).attr("title");
+                                                                   $('.modal-title').html(title);
+                                                                   content.html($(this).html());
+                                                                   $(".modal-profile").modal({show:true});
+                                                                   });
+                                                
+                        
+                              });
+                              
+                              
+            </script>
+        
+    </body>
+</html>
