@@ -9,4 +9,4 @@ It is an end to end product, with a backend which controls the logic of the appl
 
 
 
-| By Zack Pan, Yuhan Wang, Wei Wei, Tianqi Wang, Minchen Wang, Harrison Mamin, and Alan Perry
+
